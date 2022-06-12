@@ -4,6 +4,6 @@ module com.example.shopvaycuoi {
     requires java.sql;
     requires org.kordamp.bootstrapfx.core;
 
-    opens com.example.shodienthoai to javafx.fxml;
-    exports com.example.shodienthoai;
+    opens com.example.shopdienthoai to javafx.fxml;
+    exports com.example.shopdienthoai;
 }

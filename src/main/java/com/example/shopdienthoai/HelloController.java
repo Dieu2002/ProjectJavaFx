@@ -1,4 +1,4 @@
-package com.example.shodienthoai;
+package com.example.shopdienthoai;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

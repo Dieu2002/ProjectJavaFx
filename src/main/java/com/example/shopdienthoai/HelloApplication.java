@@ -1,10 +1,10 @@
-package com.example.shodienthoai;
+package com.example.shopdienthoai;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-import com.example.shodienthoai.data.DBconnection;
-import com.example.shodienthoai.model.Phone;
+import com.example.shopdienthoai.data.DBconnection;
+import com.example.shopdienthoai.model.Phone;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

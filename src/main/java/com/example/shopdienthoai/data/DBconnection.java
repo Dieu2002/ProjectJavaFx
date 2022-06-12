@@ -1,6 +1,6 @@
-package com.example.shodienthoai.data;
+package com.example.shopdienthoai.data;
 
-import com.example.shodienthoai.model.Phone;
+import com.example.shopdienthoai.model.Phone;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

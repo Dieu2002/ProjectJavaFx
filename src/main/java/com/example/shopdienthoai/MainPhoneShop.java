@@ -1,12 +1,14 @@
-package com.example.shodienthoai;
+package com.example.shopdienthoai;
 
-import com.example.shodienthoai.data.DBconnection;
-import com.example.shodienthoai.model.Phone;
+import com.example.shopdienthoai.data.DBconnection;
+import com.example.shopdienthoai.model.Phone;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class MainPhoneShop extends Application {
         grid.setVgap(10);
         grid.setHgap(10);
         DBconnection DB = new DBconnection();
-        ArrayList<Phone> productsList = DB.getPhone();
+        ArrayList<Phone> phoneList = DB.getPhone();
 
 
         grid.add(new Label("Name:"), 0, 0);
@@ -80,42 +82,53 @@ public class MainPhoneShop extends Application {
 
         //Hiện thị các sản phẩm
 
-            for(int i = 0; i < productsList.size(); i++) {
+            for(int i = 0; i < phoneList.size(); i++) {
+                Image image = new Image(phoneList.get(i).getImage());
+                ImageView imageView = new ImageView();
+                imageView.setImage(image);
+                imageView.setFitWidth(110);
+                imageView.setFitHeight(110);
+
+                grid.add(new Label(phoneList.get(i).getName()), 0, i + 2);
+                grid.add(imageView, 1, i + 2);
+                grid.add(new Label(String.valueOf(phoneList.get(i).getPrice() + "VND")), 2, i + 2);
+                grid.add(new Label(String.valueOf(phoneList.get(i).getQuantity())), 3, i + 2);
+                grid.add(new Label(String.valueOf(phoneList.get(i).getDescription())), 4, i + 2);
 
 
-            // Cập nhật sản phẩm đã có trong của hàng( sửa lại thông tin sp)
+                // Cập nhật lại sản phẩm
             var btnUpdate = new Button("Update");
             btnUpdate.setId(String.valueOf(i));
             btnUpdate.setOnAction(e -> {
                 btnAdd.setVisible(false);
                 int id1 = Integer.parseInt(btnUpdate.getId());
                 TextField tfname = (TextField) grid.getChildren().get(1);
-                tfname.setText("" + productsList.get(id1).getName());
+                tfname.setText("" + phoneList.get(id1).getName());
 
                 TextField tfimage = (TextField) grid.getChildren().get(3);
-                tfimage.setText("" + productsList.get(id1).getImage());
+                tfimage.setText("" + phoneList.get(id1).getImage());
 
                 TextField tfprice = (TextField) grid.getChildren().get(5);
-                tfprice.setText("" + productsList.get(id1).getPrice());
+                tfprice.setText("" + phoneList.get(id1).getPrice());
 
                 TextField tfquantity = (TextField) grid.getChildren().get(7);
-                tfquantity.setText("" + productsList.get(id1).getQuantity());
+                tfquantity.setText("" + phoneList.get(id1).getQuantity());
 
                 TextField tfde = (TextField) grid.getChildren().get(9);
-                tfdescription.setText("" + productsList.get(id1).getDescription());
+                tfdescription.setText("" + phoneList.get(id1).getDescription());
 
                 var newbtnAdd = new Button("Update");
                 newbtnAdd.setPadding(new Insets(5, 15, 5, 15));
                 newbtnAdd.setOnAction(newe -> {
-                    Integer id = productsList.get(id1).id;
+                    Integer id = phoneList.get(id1).id;
                     String name = tfname.getText();
-                    String image = tfimage.getText();
+                    String img = tfimage.getText();
                     float price = Float.valueOf(tfprice.getText());
                     int quantity = Integer.valueOf(tfQuantity.getText());
                     String 	description = tfdescription.getText();
                     if (!name.equals(EMPTY) && !image.equals(EMPTY) && !Objects.equals(price, EMPTY)
                             && !Objects.equals(quantity, EMPTY) && !Objects.equals(description, EMPTY)) {
-                        DB.updatePhone(new Phone(id, name, image, price, quantity,description));
+                        DB.updatePhone(new Phone(id, name, img, price, quantity,description));
                         try {
                             start(stage);
                         } catch (Exception ex) {
@@ -128,13 +141,13 @@ public class MainPhoneShop extends Application {
                     alert.setContentText("Bạn phải điền đầy đủ thông tin");
                     alert.showAndWait();
                 });
-                grid.add(newbtnAdd, 6, 1);
+                grid.add(newbtnAdd, 5, 1);
             });
-            grid.add(btnUpdate, 6, i+2);
+            grid.add(btnUpdate, 5, i+2);
 
             // Xóa sản phẩm
             var btnDelete = new Button("Delete");
-            btnDelete.setId(String.valueOf(productsList.get(i).id));
+            btnDelete.setId(String.valueOf(phoneList.get(i).id));
             btnDelete.setOnAction(e -> {
                 int id3 = Integer.parseInt(btnDelete.getId());
                 DB.deletePhone(id3);
@@ -148,10 +161,10 @@ public class MainPhoneShop extends Application {
                     throw new RuntimeException(ex);
                 }
             });
-            grid.add(btnDelete, 7, i+2);
+            grid.add(btnDelete, 6, i+2);
         }
 
-        scene = new Scene(grid, 1200, 600);
+        scene = new Scene(grid, 900, 400);
         stage.setTitle("Phone Shop");
         stage.setScene(scene);
         stage.show();

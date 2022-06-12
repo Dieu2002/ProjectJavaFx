@@ -1,4 +1,4 @@
-package com.example.shodienthoai.model;
+package com.example.shopdienthoai.model;
 
 public class Phone {
     public int id;
