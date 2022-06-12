@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>Shopvaycuoi</artifactId>
+    <artifactId>Shopbandienthoai</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Shopvaycuoi</name>
+    <name>Shopbandienthoai</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -74,7 +74,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.shopvaycuoi/com.example.shopdienthoai.HelloApplication</mainClass>
+                            <mainClass>com.example.shopdienthoai.HelloApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

@@ -18,6 +18,26 @@ public class DBconnection {
             System.out.println(var2.getMessage());
         }
     }
+    public ArrayList<admin> getAdmin(){
+        ArrayList<admin> Admin = new ArrayList<>();
+        String sql = "SELECT * FROM admin";
+        try {
+            ResultSet rs = con.prepareStatement(sql).executeQuery();
+            while (rs.next()){
+                System.out.println(rs.getString("name"));
+                System.out.println(rs.getString("password"));
+                admin ad = new admin(
+                        rs.getString("name"),
+                        rs.getString("password")
+                );
+                Admin.add(ad);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return Admin;
+    }
+
     public ArrayList<Phone> getPhone() {
         ArrayList<Phone> list = new ArrayList();
         String sql = "SELECT * FROM phoneshop";

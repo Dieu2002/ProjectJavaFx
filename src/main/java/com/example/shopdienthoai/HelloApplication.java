@@ -113,7 +113,7 @@ public class HelloApplication extends Application {
 
 
     scene = new Scene(grid, 900, 600);
-        stage.setTitle("Shop váy cưới");
+        stage.setTitle("Shop điện thoại");
         stage.setScene(scene);
         stage.show();
 }}
