@@ -41,7 +41,7 @@ public class HelloApplication extends Application {
         button.setOnAction(e->{
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
-            alert.setHeaderText("Bạn có chắc chắn muốn khám phá cửa mình không ạ?");
+            alert.setHeaderText("Bạn có muốn ghé vào shop của chúng tôi không?");
             alert.setContentText("Choose your option");
 
             ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
@@ -52,16 +52,9 @@ public class HelloApplication extends Application {
             if (result.get() == buttonTypeYes)
                 getDisplayProducts(grid,DB, stage);
             else if (result.get().getButtonData() == ButtonBar.ButtonData.NO)
-                System.out.println("NOOOOOOOOOOOOOOOOOOOOOO");
+                System.out.println("No");
             else
-                System.out.println("CANCELLLLLLLLLLLLL");
-
-            String message = result.get().getText();
-            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-            alert1.setTitle("Information");
-            alert1.setHeaderText("Cảm ơn bạn đã ghé shop");
-            alert1.setContentText(message);
-            alert1.showAndWait();
+                System.out.println("Cancel");
         });
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
@@ -110,7 +103,6 @@ public class HelloApplication extends Application {
 
 
     };
-
 
     scene = new Scene(grid, 900, 600);
         stage.setTitle("Shop điện thoại");
