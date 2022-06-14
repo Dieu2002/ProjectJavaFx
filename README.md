@@ -16,3 +16,6 @@ Các chức năng mà em chuẩn bị làm: chức năng tìm kiếm
 
 Link video demo: 
 
+
+Lịch sử commit: https://github.com/Dieu2002/ProjectJavaFx/commits/main/README.md
+
