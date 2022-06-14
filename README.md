@@ -45,11 +45,17 @@ to read about a specific subcommand or concept.
 See 'git help git' for an overview of the system.
            
            
- Câu trúc dự án
+Câu trúc dự án
+           
 ![image](https://user-images.githubusercontent.com/100500725/173483053-08783842-4218-4caf-946f-7f0a611e7c3f.png)
+           
 Ảnh chụp Entity Relationship Model
+           
 ![image](https://user-images.githubusercontent.com/100500725/173483419-994459ef-836b-4ac2-91fd-e56bb7b3f268.png)
+           
 Các chức năng mà em đã làm được : CRUD
+           
 Các chức năng mà em đang làm:  đang nhập 
+           
 Các chức năng mà em chuẩn bị làm: chức năng tìm kiếm
 
