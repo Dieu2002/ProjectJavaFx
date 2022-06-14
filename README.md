@@ -17,7 +17,8 @@ Các chức năng mà em đang làm:  Login
 Các chức năng mà em chuẩn bị làm: chức năng tìm kiếm,logout
 
 
-Link video demo: 
+Link video demo: https://drive.google.com/drive/folders/1XZgKOyyjLwcnGZY_sUL9vyBZPNamRnca?usp=sharing
+
 
 
 Lịch sử commit: https://github.com/Dieu2002/ProjectJavaFx/commits/main/README.md
