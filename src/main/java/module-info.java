@@ -1,4 +1,4 @@
-module com.example.shopvaycuoi {
+module com.example.shopdienthoai {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
