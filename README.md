@@ -12,9 +12,9 @@ Cấu trúc dự án
            
 Các chức năng mà em đã làm được : CRUD
            
-Các chức năng mà em đang làm:  đang nhập 
+Các chức năng mà em đang làm:  Login
            
-Các chức năng mà em chuẩn bị làm: chức năng tìm kiếm
+Các chức năng mà em chuẩn bị làm: chức năng tìm kiếm,logout
 
 
 Link video demo: 
