@@ -1,18 +1,24 @@
 package com.example.shopdienthoai;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
 import com.example.shopdienthoai.data.DBconnection;
+import com.example.shopdienthoai.data.admin;
 import com.example.shopdienthoai.model.Phone;
+//import com.sun.javafx.charts.Legend;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -20,54 +26,109 @@ import javafx.stage.Stage;
  * @author admin
  */
 public class HelloApplication extends Application {
+    TextField name, pass;
+    public Scene screenLogin,hopages;
+
 
 
     Button button;
-    public static void main(String[] args) {
-        launch(args);
-    }
-    private Scene scene;
+
+
+
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage)  {
+
+        DBconnection DB = new DBconnection();
+    // LOGIN
+
+        VBox loginPage = new VBox();
+        this.showLogin(loginPage, DB,stage);
+        screenLogin = new Scene(loginPage, 400, 400);
+
+//homepage
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setVgap(10);
         grid.setHgap(10);
-        DBconnection DB = new DBconnection();
+        VBox vBoxhompage = new VBox();
 
-        stage.setTitle("Alert");
-        button = new Button();
-        button.setText("Wellcome to Phone Shop");
-        button.setOnAction(e->{
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation");
-            alert.setHeaderText("Bạn có muốn ghé vào shop của chúng tôi không?");
-            alert.setContentText("Choose your option");
+//        homepage
+        vBoxhompage.setPadding(new Insets(150));
+        this.getDisplayProducts(grid,DB);
+        vBoxhompage.getChildren().add(grid);
 
-            ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
-            ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
-            ButtonType buttonTypeCancel = new ButtonType( "Cancel", ButtonBar. ButtonData. CANCEL_CLOSE);
-            alert.getButtonTypes (). setAll(buttonTypeYes, buttonTypeNo, buttonTypeCancel);
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == buttonTypeYes)
-                getDisplayProducts(grid,DB, stage);
-            else if (result.get().getButtonData() == ButtonBar.ButtonData.NO)
-                System.out.println("No");
-            else
-                System.out.println("Cancel");
-        });
-        StackPane layout = new StackPane();
-        layout.getChildren().add(button);
-        Scene scene = new Scene(layout, 300, 250);
-        stage.setScene(scene);
+        // WELCOME PHONE SHOP
+        hopages = new Scene(vBoxhompage, 1000, 1000);
+
+
+
+        stage.setScene(screenLogin);
         stage.show();
 
     }
 
+    void  showLogin(VBox loginPage , DBconnection db,Stage stage){
+        Label labelLogin =new Label("LOGIN");
+        Label Aname = new Label("Name: ");
+        Label Apassword = new Label("Password: ");
+        name = new TextField();
+        pass= new TextField();
+        HBox fieldName = new HBox();
+        fieldName.getChildren().addAll(Aname,name);
+        fieldName.setSpacing(10);
+        fieldName.setAlignment(Pos.BASELINE_CENTER);
+        HBox fieldPass = new HBox();
+        fieldPass.getChildren().addAll(Apassword,pass);
+        fieldPass.setSpacing(10);
+        fieldPass.setAlignment(Pos.BASELINE_CENTER);
+        Button btnGoBack = new Button("Register");
+        btnGoBack.setOnAction(actionEvent -> {
+            stage.setScene(screenLogin);
+        });
+        Button btnLogin = new Button("LOGIN");
+        btnLogin.setOnAction(actionEvent -> {
+            this.checkLogin(db,stage);
+        });
+        HBox btnLoginPage = new HBox();
+        btnLoginPage.getChildren().addAll(btnLogin,btnGoBack);
+        btnLoginPage.setSpacing(10);
+        btnLoginPage.setAlignment(Pos.BASELINE_CENTER);
+        loginPage.getChildren().addAll(labelLogin,fieldName,fieldPass,btnLoginPage);
+        loginPage.setSpacing(15);
+        loginPage.setAlignment(Pos.BASELINE_CENTER);
+    }
+    void checkLogin(DBconnection db,Stage stage){
+        ArrayList<admin> ad = new ArrayList<admin>();
+        ad = (ArrayList<admin>) db.getAdmin();
+        String inputName = name.getText();
+        String inputPass = pass.getText();
+        if(inputName.equals(ad.get(0).name)&& inputPass.equals(ad.get(0).password)){
+            LoginSuccess();
+            System.out.println("success!");
 
-//Hiện thị các sản phẩm
+            stage.setScene(hopages);
+            //stage.show();
 
-    private void getDisplayProducts(GridPane grid, DBconnection DB, Stage stage) {
+        }else{
+            LoginError();
+        }
+    }
+
+     void LoginError() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("ERROR");
+        alert.setContentText("Login fail!");
+        alert.show();
+    }
+     void LoginSuccess() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Login");
+        alert.setHeaderText("Hi "+name.getText());
+        alert.setContentText("Login successfully!");
+        alert.show();
+    }
+
+     void getDisplayProducts(GridPane grid, DBconnection DB) {
 
         grid.add(new Label("Name"), 1, 0);
 
@@ -99,13 +160,10 @@ public class HelloApplication extends Application {
             grid.add(new Label(String.valueOf(productsList.get(i).getQuantity())), 7, i + 2);
             grid.add(new Label(String.valueOf(productsList.get(i).getDescription())), 9, i + 2);
 
-
-
-
     };
 
-    scene = new Scene(grid, 900, 600);
-        stage.setTitle("Shop điện thoại");
-        stage.setScene(scene);
-        stage.show();
-}}
+
+}
+    public static void main(String[] args) {
+        launch(args);
+    }}

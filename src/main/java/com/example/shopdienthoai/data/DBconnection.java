@@ -18,6 +18,7 @@ public class DBconnection {
             System.out.println(var2.getMessage());
         }
     }
+
     public ArrayList<admin> getAdmin(){
         ArrayList<admin> Admin = new ArrayList<>();
         String sql = "SELECT * FROM admin";
@@ -81,11 +82,9 @@ public class DBconnection {
     }
 
     public void updatePhone(Phone phones) {
-        String sql = "UPDATE phoneshop SET phonename ='" + phones.phonename + "', img ='"
-                + phones.img + "',phoneprice="
-                + phones.phoneprice +
-                "', quantity=" +phones.quantity +
-                ",description=" + phones.description +"  WHERE id = " + phones.id;
+        String sql = "UPDATE phoneshop SET phonename ='"+phones.phonename+"', img= '"+phones.img+"', phoneprice = '"
+                +phones.phoneprice+"' , quantity = '"+phones.quantity
+                +"', description = '"+ phones.description+"' WHERE id="+ phones.id;
         System.out.println(sql);
 
         try {
